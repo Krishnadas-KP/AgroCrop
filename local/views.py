@@ -6,7 +6,7 @@ import itertools
 from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock
 
 
-
+#This is a test comment for github commit
 
 
 

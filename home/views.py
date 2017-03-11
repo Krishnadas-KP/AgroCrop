@@ -15,7 +15,7 @@ def welcomepage(request) :
 
     return render(request , 'home/index.html' , {})
 
-
+#This is a test comment for github commit
 
 def loginform(request) :
 
