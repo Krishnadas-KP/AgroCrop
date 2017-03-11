@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import District,Local,Price,FarmerDetails,FarmerTransaction , BuyerTransaction , Stock , Routes , Document
+from .models import District,Local,Price,FarmerDetails,FarmerTransaction , BuyerTransaction , Stock , Routes
 
 
 
@@ -54,11 +54,5 @@ class RoutesAdmin(admin.ModelAdmin) :
 
 
 admin.site.register(Routes , RoutesAdmin)
-
-class DocumentAdmin(admin.ModelAdmin) :
-    list_display = ['description', 'document' ,'doc' ,'uploaded_at']
-
-
-admin.site.register(Document , DocumentAdmin)
 
 

@@ -8,7 +8,7 @@ from django.contrib.auth import (
 )
 
 from .forms import LoginForm , RegForm
-from .models import Local , District , Price , FarmerDetails,Document
+from .models import Local , District , Price , FarmerDetails
 def welcomepage(request) :
 
     # AGROCROP front page
@@ -147,17 +147,4 @@ def logout_view(request):
 
 
 
-def model_form_upload(request):
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
 
-            DOC1 = request.FILES['document']
-            DOC2 = request.FILES['doc']
-           
-            return render(request,'home/uploads.html' , {'DOC1' : DOC1 , 'DOC2' : DOC2 } )
-    else:
-        form = DocumentForm()
-    return render(request, 'home/model_form_upload.html', {'form': form})
-    
