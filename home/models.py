@@ -100,18 +100,14 @@ class BuyerTransaction(models.Model) :
     Amount = models.FloatField()
     Transaction_Date = models.DateTimeField(auto_now = False , auto_now_add = True)
 
-    #def __unicode__ (self):
-        #return '%s' % (self.L_id)
-
-    #def __str__ (self):
-        #return '%s' % (self.L_id)
-
-
     def __unicode__ (self):
-        return self.L_id
+        return '%s' % (self.L_id)
 
     def __str__ (self):
-        return self.L_id
+        return '%s' % (self.L_id)
+
+
+    
         
         
 class Stock(models.Model) :
@@ -122,10 +118,10 @@ class Stock(models.Model) :
     
     
     def __unicode__ (self):
-        return self.L_id
+        return '%s' % (self.L_id)
 
     def __str__ (self):
-        return self.L_id
+        return '%s' % (self.L_id)
         
 class Routes(models.Model) :
 
@@ -136,9 +132,9 @@ class Routes(models.Model) :
     Transaction_Date = models.DateTimeField(auto_now = False , auto_now_add = True)
     
     def __unicode__ (self):
-        return self.src
+        return '%s' % (self.src)
 
     def __str__ (self):
-        return self.src
+        return '%s' % (self.src)
 
 
