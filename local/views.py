@@ -75,7 +75,7 @@ def search_users_verify(request) :
         search_text = ''
         
     users = FarmerDetails.objects.filter(Aadhaar__contains = search_text , VerifiedStatus = 0 , L_id = request.session['username'])
-    return render(request , 'local/ajax_search.html' , {'users' : users })
+    return render(request , 'local/search_users_list.html' , {'users' : users })
     
 
 
