@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
-import itertools
+
 
 from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock
 
 
-#This is a test comment for github commit
+
 
 
 
