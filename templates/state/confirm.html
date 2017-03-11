@@ -1,0 +1,63 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm</title>
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	
+</head>
+<body>
+
+<ul id="search-results">
+
+
+			{% for user in users %}
+			<form action="" method="post">
+			{% csrf_token %}
+			<div class="users panel panel-primary">
+			
+			<div class="panel-heading">
+    <h3 class="panel-title">{{user.F_Name}}</h3>
+  </div>
+			
+				
+				<div class="panel-body">
+				<label>Aadhaar Number : </label>{{user.Aadhaar}}<br>
+                <label>Item : </label>{{user.Item_id}}<br>
+                <label>Local Center : </label>{{user.L_id}}<br>
+				<label>Applied Date : </label>{{user.Apply_Date}}<br>
+
+                <label>Aadhaar Card : </label>
+                <a href="{{user.AadhaarPic.url}}">
+                <img border="0" alt="No Aadhaar" src="{{user.AadhaarPic.url}}" width="100" height="100"></a>
+                <br>
+                <label>Farm Document: </label>
+                <a href="{{user.doc.url}}">
+                <img border="0" alt="No documents" src="{{user.doc.url}}" width="100" height="100"></a>
+
+
+                
+
+
+				<input type="hidden" name="user" value="{{user.Aadhaar}},{{user.Item_id}},{{user.L_id}}"></input>
+               
+				<br><button type="submit" class="btn btn-success">CONFIRM</button>
+				</div>
+			</div>
+			
+			</form>
+			
+        {% endfor %}    
+
+
+    </ul>
+<!-- jQuery -->
+    <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+	
+
+</body>
+</html>

@@ -27,10 +27,10 @@ class Local(models.Model):
 
 
     def __unicode__ (self):
-        return self.L_id
+        return self.L_Name
 
     def __str__ (self):
-        return self.L_id
+        return self.L_Name
 
 
 class Price(models.Model):

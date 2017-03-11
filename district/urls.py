@@ -5,4 +5,5 @@ urlpatterns = [
 
 	url(r'^$', views.districtwelcomepage , name='districtwelcomepage'),
     
+    
 ]

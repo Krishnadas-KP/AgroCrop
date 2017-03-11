@@ -8,8 +8,11 @@ def districtwelcomepage(request) :
 
     if request.user.is_authenticated and (request.session['username']).startswith('D') :
 
-        return HttpResponse("<h1> District Welcome Page </h1>")
+        return render(request , 'district/welcome.html' , {'dname' : request.session['username'] })
         
     else :
     
         return redirect('/login')
+
+
+

@@ -15,6 +15,7 @@ def localwelcomepage(request):
         name = request.session['username']
         
         lname  = Local.objects.get(L_id = name)
+
         return render(request, 'local/welcome.html', {'name' : name , 'lname':lname.L_Name})
     return redirect('/login')
     

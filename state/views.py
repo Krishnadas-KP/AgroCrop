@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect
 from django.http import HttpResponse
 
-from home.models import Price , District
+from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock
 
 
 def statewelcomepage(request) :
@@ -60,7 +60,42 @@ def RateUpdater(request) :
 
 
 
+def Confirmation(request) :
+    
 
+    verifiedUsers = FarmerDetails.objects.filter(VerifiedStatus = 1 , ConfirmedStatus = 0)
+
+    if request.method == "POST" :
+        
+            person = request.POST.get('user')
+            
+            x = person.split(',')
+            Aadhaar = x[0]
+            item = x[1]
+            local = x[2]
+
+            
+            
+            localcenter = Local.objects.get(L_Name = local)
+           
+            
+            items = Price.objects.get(D_id = localcenter.D_id , Item_Name = item)
+
+        
+            
+            usersf = FarmerDetails.objects.get(Aadhaar = Aadhaar , L_id = localcenter , Item_id = items)
+            
+           
+            usersf.ConfirmedStatus = 1
+            usersf.save()
+            
+
+            return redirect('/state/confirm')
+
+
+
+
+    return render(request , 'state/confirm.html' , {'users' : verifiedUsers } )
 
 
 
