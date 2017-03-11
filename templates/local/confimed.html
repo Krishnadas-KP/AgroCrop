@@ -1,0 +1,29 @@
+{% if users > 0 %}
+    
+		
+       {% for user in users %}
+			<form action="" method="post">
+			{% csrf_token %}
+			<div class="users panel panel-success">
+			
+			<div class="panel-heading">
+    <h3 class="panel-title"><a href="profile">{{user.F_Name}}</a></h3>
+  </div>
+			
+				
+				<div class="panel-body">
+				<label>Aadhaar Number : </label>{{user.Aadhaar}}<br>
+                <label>Item : </label>{{user.Item_id}}<br>
+				<label>Applied Date : </label>{{user.Apply_Date}}<br>
+				<input type="hidden" name="user" value="{{user.Aadhaar}},{{user.Item_id}}"></input>
+				<button type="submit" class="btn btn-success">SELECT</button>
+				</div>
+			</div>
+			
+			</form>
+			
+        {% endfor %}
+{% endif %}
+
+
+

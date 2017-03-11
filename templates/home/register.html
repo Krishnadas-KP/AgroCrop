@@ -1,0 +1,129 @@
+{% load static %}
+
+<html>
+	<head>
+		
+		
+		<link href="{% static 'css/selectcss.css' %}" rel="stylesheet" type="text/css">
+		<script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+		<script src="{%static 'js/bootstrap.min.js' %}"></script>
+		<script src="{%static 'js/regajax.js' %}"></script>
+		
+		<script type="text/javascript">
+		
+						$(function(){
+						$('#btnId1').click(function(){
+							
+							$num = $("div").length + 1;
+							
+							$num = $num.toString();
+							$test = $('#crops').clone(true);
+							$test.find('#localid1').empty();
+							$newDID = 'districtid' + $num;
+							$newLID = 'localid' + $num;
+							$newIID = 'itemid' + $num;
+							$test.find('#districtid1').attr('id' , $newDID);
+							$test.find('#localid1').attr('id' , $newLID);
+							$test.find('#itemid1').attr('id' , $newIID);
+
+							$("input[id=count]").val($num)
+							
+							
+
+							$test.insertBefore('#btnId1');
+								
+						});
+						});
+					</script>
+
+	</head>
+	<body>
+	
+			<!--- Breadcrumb Navigation --->
+		<ol class="breadcrumb">
+		<li><a href="/">Home</a></li>
+		<li class="active">Registration</li>
+		</ol>
+		<!--- Breadcrumb Navigation Ends --->
+		<br>
+		<form action="" method="POST">
+		
+			{%csrf_token%}
+			
+			<span>ENTER PERSONAL DETAILS </span>
+			<table class="table table-condensed">
+			
+				<tr>
+					<td><label>Aadhaar Number : </label></td>
+					<td>{{PForm.Aadhaar}}</td>
+				</tr>
+				
+				<tr>
+					<td><label>Farmer Name: </label></td>
+					<td>{{PForm.Name}}</td>
+				</tr>
+				
+				<tr>
+					<td><label>Farmer Address : </label></td>
+					<td>{{PForm.Address}}</td>
+				</tr>
+				
+				<tr>
+					<td><label>Mobile Number : </label></td>
+					<td>{{PForm.mobNum}}</td>
+				</tr>
+
+                <tr>
+					<td><label>Bank Name : </label></td>
+					<td>{{PForm.Bank}}</td>
+				</tr>
+
+                <tr>
+					<td><label>Account Number : </label></td>
+					<td>{{PForm.ACnum}}</td>
+				</tr>
+                <tr>
+					<td><label>IFS code : </label></td>
+					<td>{{PForm.IFSC}}</td>
+				</tr>
+				
+				
+			
+			</table>
+			<br>
+			<br>
+			<span>ENTER CROP DETAILS</span>
+			<br>
+			<br>
+			<table>
+			<div id="crops" align="center">  <!-- The Block which shows district zone , local zone and crops -->
+			<br>
+				<select class="district" id="districtid1" name="district">
+					<option>Select District </option>
+					{% for district in districtset %}
+                  <option>{{district.D_Name}}</option>
+                  {% endfor %} 
+				</select>
+				<select id="localid1" class="local" name="local">
+				 <!-- Dynamically Generated Local Zone Drop Downs Come Here. Thanks to AJAX -->
+				 
+				</select>
+				<select id="itemid1" class="item" name="item">
+					<option>Select Crop </option>
+					{% for item in queryset %}
+                  <option>{{item.Item_Name}}</option>
+                  {% endfor %} 
+				</select><br>
+					
+			</div>
+			
+			<input type="hidden" name="count" id="count" class="count" value="1">
+			
+			<input type="button" id = "btnId1" value="Add New"></input>
+<br><br>
+			<button type="submit" class="btn btn-primary btn-lg">SUBMIT DETAILS</button>
+			</form>
+					
+			</body>
+			</html>

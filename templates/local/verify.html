@@ -1,0 +1,65 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify</title>
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	
+</head>
+<body>
+<!--- Breadcrumb Navigation Starts--->
+		<ol class="breadcrumb">
+		<li>Home</li>
+		<li><a href="/local">{{name}}</a></li>
+		<li class="active">Verification</li>
+		</ol>
+		<!--- Breadcrumb Navigation Ends --->
+
+
+
+
+<input type="text" id="search" name="search" />
+{% csrf_token %}
+<br><br><br>
+
+<ul id="search-results">
+
+
+			{% for user in users %}
+			<form action="" method="post">
+			{% csrf_token %}
+			<div class="users panel panel-primary">
+			
+			<div class="panel-heading">
+    <h3 class="panel-title">{{user.F_Name}}</h3>
+  </div>
+			
+				
+				<div class="panel-body">
+				<label>Aadhaar Number : </label>{{user.Aadhaar}}<br>
+                <label>Item : </label>{{user.Item_id}}<br>
+				<label>Applied Date : </label>{{user.Apply_Date}}<br>
+				<input type="hidden" name="user" value="{{user.Aadhaar}},{{user.Item_id}}"></input>
+				<button type="submit" class="btn btn-success">VERIFY</button>
+				</div>
+			</div>
+			
+			</form>
+			
+        {% endfor %}    
+
+
+    </ul>
+
+
+    
+<!-- jQuery -->
+    <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+	<script src="{%static 'js/ajax.js' %}"></script>
+
+</body>
+</html>

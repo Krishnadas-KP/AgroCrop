@@ -1,0 +1,28 @@
+{% load staticfiles%}
+<html>
+
+<head><title>AGROCROP</title></head>
+     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+     <link href="{% static 'css/stylish-portfolio.css' %}" rel="stylesheet">
+
+
+<header id="top" class="header">
+<form action="" method="POST">
+
+
+    {%csrf_token%}
+	<div class="{{class}}">
+  <strong>{{message}}</strong>
+   </div>
+    {{form.as_p}}
+	
+    <button type="submit" class="btn btn-primary">Log In</button>
+</header>
+</form>
+<script src = "{% static 'js/jquery-3.1.1.min.js' %}"></script>
+     <script src = "{% static 'js/bootstrap.min.js' %}"></script>
+<body>
+</body>
+
+
+</html>

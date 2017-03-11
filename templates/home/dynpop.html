@@ -1,0 +1,12 @@
+
+{% if locals > 0 %}
+	<select name="localid1">
+		<option>Select Nearest Center</option>
+        {% for local in locals %}
+            <option value="{{local.L_Name}}">{{local.L_Name}}</option>
+        {% endfor %} 
+    </select>
+{% endif %}	
+{% if not locals > 0 %}
+    <p> No local found.</p>
+{% endif %}

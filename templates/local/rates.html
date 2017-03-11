@@ -1,0 +1,25 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rates</title>
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+<table class="table">
+<tr>
+
+<th>Item</th>
+<th>Buying Price</th>
+<th>Selling Price</th>
+</tr>
+{% for item in items %}
+	<tr>
+	<td>{{item.Item_Name}}</td>
+	<td>{{item.Buy_Price}}</td>
+	<td>{{item.Sell_Price}}</td>
+	</tr>
+{% endfor %}
+</body>
+</html>
