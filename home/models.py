@@ -52,6 +52,8 @@ class FarmerDetails(models.Model) :
 
     Aadhaar = models.CharField(max_length = 12)
     F_Name = models.CharField(max_length = 50)
+    AadhaarPic = models.FileField()
+    doc = models.FileField()
     F_Addr = models.TextField(max_length = 150)
     F_Ph_NO = models.CharField(max_length = 15)
     L_id = models.ForeignKey(Local, on_delete=models.CASCADE)
@@ -98,11 +100,18 @@ class BuyerTransaction(models.Model) :
     Amount = models.FloatField()
     Transaction_Date = models.DateTimeField(auto_now = False , auto_now_add = True)
 
+    #def __unicode__ (self):
+        #return '%s' % (self.L_id)
+
+    #def __str__ (self):
+        #return '%s' % (self.L_id)
+
+
     def __unicode__ (self):
-        return '%s' % (self.L_id)
+        return self.L_id
 
     def __str__ (self):
-        return '%s' % (self.L_id)
+        return self.L_id
         
         
 class Stock(models.Model) :
@@ -113,10 +122,10 @@ class Stock(models.Model) :
     
     
     def __unicode__ (self):
-        return '%s' % (self.L_id)
+        return self.L_id
 
     def __str__ (self):
-        return '%s' % (self.L_id)
+        return self.L_id
         
 class Routes(models.Model) :
 
@@ -127,7 +136,14 @@ class Routes(models.Model) :
     Transaction_Date = models.DateTimeField(auto_now = False , auto_now_add = True)
     
     def __unicode__ (self):
-        return '%s' % (self.src)
+        return self.src
 
     def __str__ (self):
-        return '%s' % (self.src)
+        return self.src
+
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    doc = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+

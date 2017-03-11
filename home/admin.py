@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import District,Local,Price,FarmerDetails,FarmerTransaction , BuyerTransaction , Stock , Routes
+from .models import District,Local,Price,FarmerDetails,FarmerTransaction , BuyerTransaction , Stock , Routes , Document
 
 
 
@@ -22,7 +22,7 @@ class PriceAdmin(admin.ModelAdmin) :
 admin.site.register(Price,PriceAdmin)
 
 class FarmerDetailsAdmin(admin.ModelAdmin) :
-    list_display = ['id','Aadhaar','F_Name','F_Addr','L_id','Item_id', 'Bank' ,'IFSC' , 'AC_NO' , 'Apply_Date' , 'VerifiedStatus' ,  'ConfirmedStatus']
+    list_display = ['id','Aadhaar','F_Name','AadhaarPic', 'doc','F_Addr','L_id','Item_id', 'Bank' ,'IFSC' , 'AC_NO' , 'Apply_Date' , 'VerifiedStatus' ,  'ConfirmedStatus']
 
 admin.site.register(FarmerDetails,FarmerDetailsAdmin)
 
@@ -54,3 +54,11 @@ class RoutesAdmin(admin.ModelAdmin) :
 
 
 admin.site.register(Routes , RoutesAdmin)
+
+class DocumentAdmin(admin.ModelAdmin) :
+    list_display = ['description', 'document' ,'doc' ,'uploaded_at']
+
+
+admin.site.register(Document , DocumentAdmin)
+
+

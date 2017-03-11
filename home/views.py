@@ -8,7 +8,7 @@ from django.contrib.auth import (
 )
 
 from .forms import LoginForm , RegForm
-from .models import Local , District , Price , FarmerDetails
+from .models import Local , District , Price , FarmerDetails,Document
 def welcomepage(request) :
 
     # AGROCROP front page
@@ -66,6 +66,8 @@ def registration(request) :
         ACnum = form.cleaned_data.get("ACnum")
         Bank = form.cleaned_data.get("Bank")
         IFSC = form.cleaned_data.get("IFSC")
+        documents = request.FILES.getlist("farmdoc")
+        Aadhaarpic = request.FILES.get("aadhaarpic")
         
         
       
@@ -83,7 +85,7 @@ def registration(request) :
           
             Locals = Local.objects.get(L_Name = locals[i])
 
-            farmer = FarmerDetails.objects.create(Aadhaar = Aadhaar , F_Name = name , F_Addr = Address , F_Ph_NO = mobNum ,L_id = Locals, Item_id = Item , Bank = Bank , AC_NO = ACnum , IFSC = IFSC , VerifiedStatus = 0 , ConfirmedStatus = 0)
+            farmer = FarmerDetails.objects.create(Aadhaar = Aadhaar , F_Name = name ,AadhaarPic = Aadhaarpic, doc = documents[i] ,F_Addr = Address , F_Ph_NO = mobNum ,L_id = Locals, Item_id = Item , Bank = Bank , AC_NO = ACnum , IFSC = IFSC , VerifiedStatus = 0 , ConfirmedStatus = 0)
             farmer.save()
             i = i+1
             count = count-1  
@@ -131,4 +133,31 @@ def logout_view(request):
 
     logout(request)
     return redirect('/')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+
+            DOC1 = request.FILES['document']
+            DOC2 = request.FILES['doc']
+           
+            return render(request,'home/uploads.html' , {'DOC1' : DOC1 , 'DOC2' : DOC2 } )
+    else:
+        form = DocumentForm()
+    return render(request, 'home/model_form_upload.html', {'form': form})
     

@@ -1,6 +1,6 @@
 
 from django import forms
-
+from home.models import Document
 
 
 class LoginForm(forms.Form):
@@ -23,6 +23,8 @@ class RegForm(forms.Form):
     Bank = forms.CharField(label = "Bank Name" ,max_length=16,widget = forms.TextInput(attrs = {'name' : 'Bank'}))
     IFSC = forms.CharField(label = "IFS Code" ,max_length=16,widget = forms.TextInput(attrs = {'name' : 'IFSC'}))
     
-    
-    
-    
+ 
+
+
+
+

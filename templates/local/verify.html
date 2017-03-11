@@ -40,8 +40,21 @@
 				<label>Aadhaar Number : </label>{{user.Aadhaar}}<br>
                 <label>Item : </label>{{user.Item_id}}<br>
 				<label>Applied Date : </label>{{user.Apply_Date}}<br>
+
+                <label>Aadhaar Card : </label>
+                <a href="{{user.AadhaarPic.url}}">
+                <img border="0" alt="No Aadhaar" src="{{user.AadhaarPic.url}}" width="100" height="100"></a>
+                <br>
+                <label>Farm Document: </label>
+                <a href="{{user.doc.url}}">
+                <img border="0" alt="No documents" src="{{user.doc.url}}" width="100" height="100"></a>
+
+
+                
+
+
 				<input type="hidden" name="user" value="{{user.Aadhaar}},{{user.Item_id}}"></input>
-				<button type="submit" class="btn btn-success">VERIFY</button>
+				<br><button type="submit" class="btn btn-success">VERIFY</button>
 				</div>
 			</div>
 			

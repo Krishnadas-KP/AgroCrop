@@ -20,12 +20,15 @@
 							$num = $num.toString();
 							$test = $('#crops').clone(true);
 							$test.find('#localid1').empty();
+                            $test.find('#farmdocid1').val("");
 							$newDID = 'districtid' + $num;
 							$newLID = 'localid' + $num;
 							$newIID = 'itemid' + $num;
+                            $newFID = 'farmdocid' + $num;
 							$test.find('#districtid1').attr('id' , $newDID);
 							$test.find('#localid1').attr('id' , $newLID);
 							$test.find('#itemid1').attr('id' , $newIID);
+                            $test.find('#farmdocid1').attr('id' , $newFID);
 
 							$("input[id=count]").val($num)
 							
@@ -47,7 +50,7 @@
 		</ol>
 		<!--- Breadcrumb Navigation Ends --->
 		<br>
-		<form action="" method="POST">
+		<form action="" method="POST" enctype="multipart/form-data">
 		
 			{%csrf_token%}
 			
@@ -58,7 +61,13 @@
 					<td><label>Aadhaar Number : </label></td>
 					<td>{{PForm.Aadhaar}}</td>
 				</tr>
-				
+
+                <tr>
+                    <td>
+                    <input type="file" name="aadhaarpic" id="aadhaarpic" class="aadhaarpic">
+                    </td>
+				</tr>
+
 				<tr>
 					<td><label>Farmer Name: </label></td>
 					<td>{{PForm.Name}}</td>
@@ -114,7 +123,9 @@
 					{% for item in queryset %}
                   <option>{{item.Item_Name}}</option>
                   {% endfor %} 
-				</select><br>
+				</select>
+                <input type="file" name="farmdoc" id="farmdocid1" class="farmdoc">
+                <br>
 					
 			</div>
 			
