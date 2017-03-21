@@ -65,6 +65,10 @@ class FarmerDetails(models.Model) :
     VerifiedStatus = models.CharField(max_length=1 , default="0") #1 for Yes 0 for No
     ConfirmedStatus = models.CharField(max_length=1 , default="0") #1 for Yes 0 for No
 
+    def save(self, *args, **kwargs):
+        print 
+        super(Blog, self).save(*args, **kwargs) # Call the "real" save() method.
+        do_something_else()
 
     def __unicode__ (self):
         return self.Aadhaar

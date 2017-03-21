@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'local.apps.LocalConfig',
     'home.apps.HomeConfig',
+    'state.apps.StateConfig',
 
    ]
 
