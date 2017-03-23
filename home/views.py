@@ -132,6 +132,7 @@ def rates(request) :
     return render(request , 'home/rates.html' , {'districts' : districts})
 
 
+
 def logout_view(request):
 
     logout(request)

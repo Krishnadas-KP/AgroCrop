@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^vsearch', views.search_users_verify , name='search_users_verify'),
     
     url(r'^amtfind', views.amtfinder , name='amtfinder'),
+    url(r'^polling', views.pollingData , name='pollingData'),
     url(r'^colFarmItem', views.CollectFarmerItems , name='CollectFarmerItems'),
     
 ]

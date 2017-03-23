@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 
 
-from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock
+from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock,Routes
 
 
 
@@ -11,12 +11,15 @@ from home.models import FarmerDetails , Local , Price , District , BuyerTransact
 
 
 def localwelcomepage(request):
+
     if request.user.is_authenticated:
         name = request.session['username']
         
         lname  = Local.objects.get(L_id = name)
 
-        return render(request, 'local/welcome.html', {'name' : name , 'lname':lname.L_Name})
+        count = Routes.objects.filter(src = name).count()
+
+        return render(request, 'local/welcome.html', {'name' : name , 'lname':lname.L_Name , 'count' : count })
     return redirect('/login')
     
     
@@ -123,6 +126,19 @@ def buyvegetables(request) :
         return render(request, 'local/buy.html' ,{'name':name})
     
     return redirect('/login')
+
+def pollingData(request) :
+
+    
+
+    LocalCenter = request.session['username']
+
+    count = Routes.objects.filter(src = LocalCenter).count()
+    
+    return HttpResponse(count)
+
+    
+    
     
 
 def CollectFarmerItems(request) :
@@ -201,9 +217,12 @@ def sellvegetables(request) :
         return render(request, 'local/sell.html' , {'dis' : Dist.D_id , 'items' : Item})
     return redirect('/login')
 
+
 def amtfinder(request):
 
     if request.method == "POST" :
+
+     
     
         qty = request.POST['search_data']
         rate = request.POST['rate']
@@ -217,7 +236,7 @@ def amtfinder(request):
         return HttpResponse(amount)
        
        
-        #return render(request , 'local/amtfind.html' ,{'amount' : amount , 'q' : qty })
+        
         
           
     

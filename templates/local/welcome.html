@@ -6,9 +6,10 @@
     <meta charset="UTF-8">
     <title>{{lname}}</title>
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
 </head>
 <body>
-
+{% csrf_token %}
 <!--- Breadcrumb Navigation Starts--->
 		<ol class="breadcrumb">
 		<li><a href="/">Home</a></li>
@@ -21,11 +22,51 @@
   <li role="presentation"><a href="buy">Buy Vegetables</a></li>
   <li role="presentation"><a href="sell">Sell Vegetables</a></li>
   <li role="presentation"><a href="rates">Today's Rates</a></li>
-  <li role="presentation"><a href="transport">Transport</a></li>
+  <li role="presentation"><a href="transport">Transport<span class="badge">{{count}}</span></a></li>
   <li role="presentation"><a href="/logout">Logout</a></li>
 </ul>
 Hello Local Zone..... {{lname}}
+<input type="hidden" id="localCenter"/>
 <br>
+<script type="text/javascript">
+function refresh() {
+    
+    $.ajax({
+            type: "POST",
+            url: "/local/polling/",
 
+            data: {
+                
+			
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+
+               
+            },
+            
+            success: function(data){
+				
+               
+
+                   
+                   $('.badge').text(data)
+
+                    
+			                       },
+            dataType: 'html'
+			
+			
+			
+        });
+
+    
+    setTimeout(refresh, 10000);
+   
+}
+
+setTimeout(refresh, 10000);
+
+
+
+</script>
 </body>
 </html>
