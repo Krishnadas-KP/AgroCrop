@@ -16,6 +16,10 @@
 		<li class="active">{{lname}}</li>
 		</ol>
 		<!--- Breadcrumb Navigation Ends --->
+<div class="jumbotron">
+  <h1>{{lname}}</h1>
+  
+</div>
 		<ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="#">Home</a></li>
   <li role="presentation"><a href="verify">Verification</a></li>
@@ -25,7 +29,7 @@
   <li role="presentation"><a href="transport">Transport<span class="badge">{{count}}</span></a></li>
   <li role="presentation"><a href="/logout">Logout</a></li>
 </ul>
-Hello Local Zone..... {{lname}}
+
 <input type="hidden" id="localCenter"/>
 <br>
 <script type="text/javascript">
@@ -59,11 +63,11 @@ function refresh() {
         });
 
     
-    setTimeout(refresh, 10000);
+    setTimeout(refresh, 15000);
    
 }
 
-setTimeout(refresh, 10000);
+setTimeout(refresh, 15000);
 
 
 
