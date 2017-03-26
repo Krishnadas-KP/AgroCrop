@@ -270,5 +270,8 @@ def checkrates(request) :
 def transport(request) :
 
     if request.user.is_authenticated:
-        return render(request, 'local/transport.html' , {})
+
+
+        routes = Routes.objects.filter(src = request.session['username'])
+        return render(request, 'local/transport.html' , {'routes' : routes})
     return redirect('/login')

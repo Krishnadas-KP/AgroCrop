@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'i=8(s%&$*&awv6=36&lm%gv0u#99%-h6@u%1m*y==&-wl@pvah'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [u'agroapp.pythonanywhere.com' , '127.0.0.1']
 
