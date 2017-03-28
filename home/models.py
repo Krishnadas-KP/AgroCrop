@@ -128,7 +128,7 @@ class Routes(models.Model) :
 
     src = models.ForeignKey(Local, related_name='source', on_delete=models.CASCADE)
     dest = models.ForeignKey(Local,related_name='destination', on_delete=models.CASCADE)
-    Item_id = models.ForeignKey(Price, on_delete=models.CASCADE)
+    Item_Name = models.CharField(max_length=50)
     Quantity = models.FloatField()
     Transaction_Date = models.DateTimeField(auto_now = False , auto_now_add = True)
     

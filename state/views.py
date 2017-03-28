@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect
 from django.http import HttpResponse
 
-from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock
+from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock , Routes
 
 
 def statewelcomepage(request) :
@@ -101,13 +101,57 @@ def Confirmation(request) :
 
 
 
+def transport(request):
+
+    if request.user.is_authenticated :
+    
+        if request.method == "POST":
+        
+            TransportItem = request.POST.get('item')
+            Source = request.POST.get('source')
+            LCTotalQty = request.POST.get('quantity')
+            
+            localCentersDest = Stock.objects.filter(Item_id__Item_Name = TransportItem , Quantity__lt = 10.0).order_by('Quantity')
+            
+            return render(request , 'state/transdest.html' ,{'localCenters' : localCentersDest , 'remain' : LCTotalQty , 'source' : Source , 'item' : TransportItem})
+            
+        localCentersSrc = Stock.objects.filter(Quantity__gt = 10.0).order_by('-Quantity')
+    
+        return render(request , 'state/transport.html' , {'localCenters' : localCentersSrc} )
 
 
 
+def StockAllocate(request) :
 
+    if request.method == "POST" :
+    
+        source = request.POST.get('source')
+        destn = request.POST.getlist('dest')
+        item = request.POST.get('item')
+        qty = request.POST.getlist('allocatedAmt')
+        count = len(destn)
+        i = 0
+        while(count > 0 ) :
+            
+            print qty[i]
+            if qty[i] <> 0 :
+                #RouteInstance = Routes(src__L_Name = source , dest__L_Name = destn[i] , Item_id__Item_Name = item , Quantity = qty[i])
+                
+                
+                L = Local.objects.get(L_Name = source)
+                D = Local.objects.get(L_Name = destn[i])
+                #I = Price.objects.filter(Item_Name = item).distinct()
+                
+                RouteInstance = Routes.objects.create(src = L , dest = D , Item_Name = item , Quantity = qty[i])
+                RouteInstance.save()
+                
+                i = i + 1
+                count = count - 1
+           
+        
+    return redirect('/state')
 
-
-
+        
 
 
 

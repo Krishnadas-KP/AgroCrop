@@ -17,7 +17,7 @@ class LocalAdmin(admin.ModelAdmin) :
 admin.site.register(Local , LocalAdmin)
 
 class PriceAdmin(admin.ModelAdmin) :
-    list_display = ['Item_id','Item_Name','D_id','Buy_Price','Sell_Price']
+    list_display = ['id' , 'Item_id','Item_Name','D_id','Buy_Price','Sell_Price']
 
 admin.site.register(Price,PriceAdmin)
 
@@ -42,7 +42,7 @@ admin.site.register(BuyerTransaction , BuyerTransactionAdmin)
 
 
 class StockAdmin(admin.ModelAdmin) :
-    list_display = ['L_id', 'Item_id' ,'Quantity']
+    list_display = ['id' ,'L_id', 'Item_id' ,'Quantity']
 
 
 admin.site.register(Stock , StockAdmin)
@@ -50,7 +50,7 @@ admin.site.register(Stock , StockAdmin)
 
 
 class RoutesAdmin(admin.ModelAdmin) :
-    list_display = ['id' , 'src', 'dest' ,'Item_id' ,'Quantity' ,'Transaction_Date' ]
+    list_display = ['id' , 'src', 'dest' ,'Item_Name' ,'Quantity' ,'Transaction_Date' ]
 
 
 admin.site.register(Routes , RoutesAdmin)
