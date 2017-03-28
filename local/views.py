@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 
 
-from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock,Routes
+from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction , Stock, Routes
 
 
 
@@ -258,20 +258,31 @@ def checkrates(request) :
     return redirect('/login')
 
 
-    
-    
-    
-    
-    
-    
-    
+
     
 
 def transport(request) :
 
     if request.user.is_authenticated:
 
-
+        if request.method == "POST" :
+ 
+            id = request.POST.get('routeID')
+            deleteRoutesInstance(id)
+            return redirect('/local')
+            
         routes = Routes.objects.filter(src = request.session['username'])
-        return render(request, 'local/transport.html' , {'routes' : routes})
+        
+        return render(request, 'local/transport.html' , {'routes' : routes })
+        
     return redirect('/login')
+    
+    
+def deleteRoutesInstance(id):
+
+    RoutesInstance = Routes.objects.get(id = id)
+        
+    RoutesInstance.delete()
+        
+    
+    
