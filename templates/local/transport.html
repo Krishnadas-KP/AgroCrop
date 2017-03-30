@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Transport</title>
+    <title>Transport Out</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 <body>
@@ -19,7 +19,7 @@
 				
 				<div class="panel-body">
 				
-                <label>Item : </label>{{route.Item_id}}<br>
+                <label>Item : </label>{{route.Item_Name}}<br>
                 <label>Quantity : </label>{{route.Quantity}} Kg<br>
 				<label>Issued Date : </label>{{route.Transaction_Date}}<br>
 				<input type="hidden" name="routeID" value="{{route.id}}"/>

@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^confirm', views.Confirmation , name='Confirmation'),
     url(r'^transport', views.transport , name='transport'),
     url(r'^allocate', views.StockAllocate , name='StockAllocate'),
+    url(r'^deleteUser', views.deleteUser , name='deleteUser'),
    
     
 ]

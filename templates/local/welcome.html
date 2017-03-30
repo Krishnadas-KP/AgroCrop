@@ -16,6 +16,12 @@
 		<li class="active">{{lname}}</li>
 		</ol>
 		<!--- Breadcrumb Navigation Ends --->
+		
+		
+		
+
+			
+			
 <div class="jumbotron">
   <h1>{{lname}}</h1>
   
@@ -26,7 +32,9 @@
   <li role="presentation"><a href="buy">Buy Vegetables</a></li>
   <li role="presentation"><a href="sell">Sell Vegetables</a></li>
   <li role="presentation"><a href="rates">Today's Rates</a></li>
-  <li role="presentation"><a href="transport">Transport<span class="badge">{{count}}</span></a></li>
+  <li role="presentation"><a href="transportOut">Transport Out<span id="BadgeOut" class="badge">{{count}}</span></a></li>
+  <li role="presentation"><a href="transportIn">Transport In<span id="BadgeIn" class="badge">{{InCount}}</span></a></li>
+  <li role="presentation"><a href="pending">Receive Pending</a></li>
   <li role="presentation"><a href="/logout">Logout</a></li>
 </ul>
 
@@ -49,10 +57,11 @@ function refresh() {
             
             success: function(data){
 				
-               
+	            
 
                    
-                   $('.badge').text(data)
+                   $('#BadgeOut').text(data[0])
+				   $('#BadgeIn').text(data[1])
 
                     
 			                       },

@@ -130,6 +130,7 @@ class Routes(models.Model) :
     dest = models.ForeignKey(Local,related_name='destination', on_delete=models.CASCADE)
     Item_Name = models.CharField(max_length=50)
     Quantity = models.FloatField()
+    SendStatus = models.CharField(max_length=1 , default="0")
     Transaction_Date = models.DateTimeField(auto_now = False , auto_now_add = True)
     
     def __unicode__ (self):

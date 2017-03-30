@@ -3,6 +3,8 @@ from django.http import HttpResponse
 
 from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock , Routes
 
+import json as simplejson , urllib
+from django.db.models import Q
 
 def statewelcomepage(request) :
 
@@ -111,7 +113,24 @@ def transport(request):
             Source = request.POST.get('source')
             LCTotalQty = request.POST.get('quantity')
             
-            localCentersDest = Stock.objects.filter(Item_id__Item_Name = TransportItem , Quantity__lt = 10.0).order_by('Quantity')
+            #localCentersDest = Stock.objects.filter(Item_id__Item_Name = TransportItem , Quantity__lt = 10.0).order_by('Quantity')
+            #print localCentersDest
+            localCentersDest = Stock.objects.none()
+            
+            localCenters = Stock.objects.filter(Item_id__Item_Name = TransportItem , Quantity__lt = 10.0).order_by('Quantity')
+            
+            for localCenter in localCenters :
+            
+                source = str(Source)
+                dest = str(localCenter.L_id)
+                url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='+source+'&destinations='+dest+'&key=AIzaSyD-itnbYYRdntj6xMcEEB5TqU5kvyCntBw'
+                result= simplejson.load(urllib.urlopen(url))
+                distance = result['rows'][0]['elements'][0]['distance']['value']
+            
+                if float(distance) < 50000.0 :
+                
+                    x = localCenters.filter(L_id = localCenter.L_id)
+                    localCentersDest = localCentersDest|x
             
             return render(request , 'state/transdest.html' ,{'localCenters' : localCentersDest , 'remain' : LCTotalQty , 'source' : Source , 'item' : TransportItem})
             
@@ -133,27 +152,35 @@ def StockAllocate(request) :
         i = 0
         while(count > 0 ) :
             
-            print qty[i]
-            if qty[i] <> 0 :
-                #RouteInstance = Routes(src__L_Name = source , dest__L_Name = destn[i] , Item_id__Item_Name = item , Quantity = qty[i])
+            
+            if int(qty[i]) <> 0 :   # To avoid allocaing 0 Kg in the Routes table
+                
                 
                 
                 L = Local.objects.get(L_Name = source)
                 D = Local.objects.get(L_Name = destn[i])
-                #I = Price.objects.filter(Item_Name = item).distinct()
+                
                 
                 RouteInstance = Routes.objects.create(src = L , dest = D , Item_Name = item , Quantity = qty[i])
                 RouteInstance.save()
                 
-                i = i + 1
-                count = count - 1
-           
+            i = i + 1
+            count = count - 1
+            
         
     return redirect('/state')
 
         
 
+def deleteUser(request):
 
+    if request.method == "POST" :
+        id = request.POST.get('id')
+        instance = FarmerDetails.objects.get(id = id)
+        instance.delete()
+        
+    return redirect('/state/confirm')   
+    
 
 
 

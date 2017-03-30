@@ -1,0 +1,46 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+</head>
+<body>
+<h1>BILL</h1>
+
+<h3>AADHAAR NUMBER : {{Aadhaar}}</h3>
+<table class="table table-bordered">
+<tr>
+<th>ITEM</th>
+<th>QUANTITY</th>
+<th>RATE</th>
+<th>AMOUNT</th>
+</tr>
+{%csrf_token%}
+
+{% for Billinstance in Billinstances %}
+<tr>
+	<td>{{Billinstance.Item_id}}</td>
+	<td>{{Billinstance.Quantity}}</td>
+	<td>{{Billinstance.Rate}}</td>
+	<td>{{Billinstance.Amount}}</td>
+</tr>
+{% endfor %}
+
+</table>
+<div id="total">
+	<h3>Total : {{total}} Rs.</h3>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+    window.print();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Destination</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+<h3> Local Centers With Low Stock </h3>
+
+			<label>SELECTED SOURCE : </label>{{source}}<br>
+			
+			<label>SELECTED ITEM : </label>{{item}}<br>
+			
+			<label>REMAINING AT SOURCE : </label><input type="text" name="remaining" id="remain" value="{{remain}}" disabled/>Kg
+{% for localCenter in localCenters %}
+
+			
+			<form action="allocate" method="post">
+			<input type="hidden" name="item" value="{{item}}"/>
+			<input type="hidden" name="source" value="{{source}}"/>
+			{% csrf_token %}
+			<div class="panel panel-danger col-sm-6">
+			
+			<div class="panel-heading">
+    <h3 class="panel-title">{{localCenter.L_id}}</h3>
+  </div>
+			
+				
+				<div class="panel-body">
+				
+                <label>Item : </label>{{localCenter.Item_id}}<br>
+                <label>Quantity : </label>{{localCenter.Quantity}} Kg<br>
+				<label>Allocate : </label><input type="text" name="allocatedAmt" class="allocatedAmt" value = "0"/> Kg
+				<input type="hidden" name="dest" value="{{localCenter.L_id}}"/>
+				
+				<input type="hidden" name="quantity" value="{{localCenter.Quantity}}"/>
+
+				
+				</div>
+			</div>
+			
+			
+			
+        {% endfor %}   
+		
+		<br><button type="submit" class="btn btn-success">Allocate</button>
+		</form>
+		
+    <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+
+    <script src="{%static 'js/bootstrap.min.js' %}"></script> 
+	<script type="text/javascript">
+	
+	$(function(){
+	
+		$currentRemain = parseFloat($('#remain').val());
+	
+	$(".allocatedAmt").keyup(function(){
+	
+				
+				$amount = 0.0;
+                
+                $('.allocatedAmt').each(function(){
+
+						if($(this).val()==''){
+						
+							$val = 0.0;
+						}
+						
+						else{$val = parseFloat($(this).val())}
+
+                        $amount = $amount + parseFloat($val);
+                            });
+                
+				$newRemain = $currentRemain - $amount;
+				
+				
+				
+                $('#remain').val($newRemain)
+				
+				if($newRemain < 10.0 ){alert("Need to leave atleast 10.0 Kg at source. Please Reallocate"); }
+				
+	});
+});
+	</script>
+</body>
+</html>

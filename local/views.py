@@ -17,9 +17,9 @@ def localwelcomepage(request):
         
         lname  = Local.objects.get(L_id = name)
 
-        count = Routes.objects.filter(src = name).count()
-
-        return render(request, 'local/welcome.html', {'name' : name , 'lname':lname.L_Name , 'count' : count })
+        count = Routes.objects.filter(src = name , SendStatus = 0).count()
+        InCount = Routes.objects.filter(dest = name , SendStatus = 1).count()
+        return render(request, 'local/welcome.html', {'name' : name , 'lname':lname.L_Name , 'count' : count , 'InCount' : InCount })
     return redirect('/login')
     
     
@@ -133,7 +133,10 @@ def pollingData(request) :
 
     LocalCenter = request.session['username']
 
-    count = Routes.objects.filter(src = LocalCenter).count()
+    CountOut = str(Routes.objects.filter(src = LocalCenter , SendStatus = 0).count())
+    CountIn = str(Routes.objects.filter(dest = LocalCenter , SendStatus = 1).count())
+    
+    count = CountOut + CountIn
     
     return HttpResponse(count)
 
@@ -154,25 +157,27 @@ def CollectFarmerItems(request) :
             qtty = request.POST.getlist('qty')
             amnt = request.POST.getlist('amt')
             userAadhaar = request.POST.get('user')
+            total = request.POST.get('total')
             
             
             i = 0
             count = len(amnt)
-            
+            BuyInstances = FarmerTransaction.objects.none()
             while i<count :
             
                 itm = Price.objects.get(Item_id = items[i].split(',')[0] , D_id = localcenter.D_id)
                 
                 instance = FarmerTransaction.objects.create(L_id = localcenter , Aadhaar = userAadhaar , Item_id = itm , Quantity = qtty[i] , Rate = rates[i] , Amount = amnt[i])
                 instance.save()
-                
+                newInstance = FarmerTransaction.objects.filter(id = instance.id)
+                BuyInstances = BuyInstances|newInstance
                 stock = Stock.objects.get(L_id = localcenter , Item_id = itm)
                 
                 stock.Quantity = float(stock.Quantity) + float(qtty[i])
                 stock.save()
                 i = i+1
           
-            return redirect('/local')   
+            return render(request , 'local/buybill.html' , {'Billinstances' : BuyInstances , 'Aadhaar' : userAadhaar , 'total' : total})
 
 
     
@@ -194,23 +199,29 @@ def sellvegetables(request) :
             rates = request.POST.getlist('rate')
             qtty = request.POST.getlist('qty')
             amnt = request.POST.getlist('amt')
+            total = float(request.POST.get('total'))
             i = 0
             count = len(amnt)
-            
+            Billinstance = BuyerTransaction.objects.none()
             while i<count :
             
                 itm = Price.objects.get(Item_id = items[i].split(',')[0] , D_id = Dist.D_id)
                 
                 instance = BuyerTransaction.objects.create(L_id = Dist , Item_id = itm , Quantity = qtty[i] , Rate = rates[i] , Amount = amnt[i])
+                
+                
                 instance.save()
+                newInstance = BuyerTransaction.objects.filter(id = instance.id)
+                
+                Billinstance = Billinstance|newInstance
                 
                 stock = Stock.objects.get(L_id = Dist , Item_id = itm)
                 
                 stock.Quantity = float(stock.Quantity) - float(qtty[i])
                 stock.save()
                 i = i+1
-          
-            return redirect('/local')
+            
+            return render(request , 'local/sellbill.html' , {'Billinstances' : Billinstance , 'total' : total})
             
             
         
@@ -268,15 +279,50 @@ def transport(request) :
         if request.method == "POST" :
  
             id = request.POST.get('routeID')
-            deleteRoutesInstance(id)
+            instance = Routes.objects.get(id = id)
+            instance.SendStatus = 1
+            instance.save()
+            
+            updateStock = Stock.objects.get(L_id = request.session['username'] , Item_id__Item_Name = instance.Item_Name)
+             
+            updateStock.Quantity = float(updateStock.Quantity) - float(instance.Quantity)
+            updateStock.save()
+            
             return redirect('/local')
             
-        routes = Routes.objects.filter(src = request.session['username'])
+        routes = Routes.objects.filter(src = request.session['username'] , SendStatus = 0)
         
         return render(request, 'local/transport.html' , {'routes' : routes })
         
     return redirect('/login')
     
+def transportIn(request) :
+
+    if request.user.is_authenticated:
+
+        if request.method == "POST" :
+ 
+            id = request.POST.get('routeID')
+            instance = Routes.objects.get(id = id)
+            instance.delete()
+            
+            updateStock = Stock.objects.get(L_id = request.session['username'] , Item_id__Item_Name = instance.Item_Name)
+             
+            updateStock.Quantity = float(updateStock.Quantity) + float(instance.Quantity)
+            updateStock.save()
+            
+            return redirect('/local') 
+            
+        routes = Routes.objects.filter(dest = request.session['username'] , SendStatus = 1)
+        
+        return render(request, 'local/transportIn.html' , {'routes' : routes })
+        
+    return redirect('/login')
+
+def pendingReceive(request) :
+
+    routes = Routes.objects.filter(src = request.session['username'] , SendStatus = 1)
+    return render(request , 'local/pendingReceive.html' , {'routes' : routes})
     
 def deleteRoutesInstance(id):
 

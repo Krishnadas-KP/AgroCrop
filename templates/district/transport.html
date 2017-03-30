@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Source</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+<h3> Local Centers With Surplus Stock </h3>
+{% for localCenter in localCenters %}
+			<form action="" method="post">
+			{% csrf_token %}
+			<div class="panel panel-danger col-sm-6">
+			
+			<div class="panel-heading">
+    <h3 class="panel-title">{{localCenter.L_id}}</h3>
+  </div>
+			
+				
+				<div class="panel-body">
+				
+                <label>Item : </label>{{localCenter.Item_id}}<br>
+                <label>Quantity : </label>{{localCenter.Quantity}} Kg<br>
+				<input type="hidden" name="source" value="{{localCenter.L_id}}"/>
+				<input type="hidden" name="item" value="{{localCenter.Item_id}}"/>
+				<input type="hidden" name="quantity" value="{{localCenter.Quantity}}"/>
+				
+				
+				<br><button type="submit" class="btn btn-success">Allocate</button>
+				</div>
+			</div>
+			
+			</form>
+			
+        {% endfor %}   
+
+    <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+
+
+    <script src="{%static 'js/bootstrap.min.js' %}"></script> 
+</body>
+</html>

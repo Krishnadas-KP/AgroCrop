@@ -50,7 +50,7 @@ admin.site.register(Stock , StockAdmin)
 
 
 class RoutesAdmin(admin.ModelAdmin) :
-    list_display = ['id' , 'src', 'dest' ,'Item_Name' ,'Quantity' ,'Transaction_Date' ]
+    list_display = ['id' , 'src', 'dest' ,'Item_Name' ,'Quantity' ,'SendStatus','Transaction_Date' ]
 
 
 admin.site.register(Routes , RoutesAdmin)

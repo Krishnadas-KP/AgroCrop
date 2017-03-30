@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transport In</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+{% for route in routes %}
+			<form action="" method="post">
+			{% csrf_token %}
+			<div class="panel panel-success">
+			
+			<div class="panel-heading">
+    <h3 class="panel-title">{{route.src}}</h3>
+  </div>
+			
+				
+				<div class="panel-body">
+				
+                <label>Item : </label>{{route.Item_Name}}<br>
+                <label>Quantity : </label>{{route.Quantity}} Kg<br>
+				<label>Issued Date : </label>{{route.Transaction_Date}}<br>
+				<input type="hidden" name="routeID" value="{{route.id}}"/>
+				
+				<br><button type="submit" class="btn btn-success">DONE</button>
+				</div>
+			</div>
+			
+			</form>
+			
+        {% endfor %}   
+
+    <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+
+
+    <script src="{%static 'js/bootstrap.min.js' %}"></script> 
+</body>
+</html>
