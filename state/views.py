@@ -1,10 +1,12 @@
 from django.shortcuts import render ,redirect
 from django.http import HttpResponse
 
+from forms import LocalAddForm
 from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock , Routes
+from django.contrib.auth.models import User
 
 import json as simplejson , urllib
-from django.db.models import Q
+
 
 def statewelcomepage(request) :
 
@@ -184,6 +186,48 @@ def deleteUser(request):
 
 
 
+def addLocal(request):
+    if request.user.is_authenticated and request.session['username'].startswith('a'):
+        
+        form = LocalAddForm(request.POST or None)
+        if form.is_valid():
+            LocCenName = request.POST.get('LName')
+          
+            DistrictID = request.POST.get('District')
+            
+            pwd = request.POST.get('password')
+            
+            DistInst = District.objects.get(D_id = DistrictID)
+            LastLocal = Local.objects.last()
+            LastId =  int((LastLocal.L_id).split('L')[1])
+            LastId = LastId + 1
+            x =  "%04d" % (LastId)
+            NewID = 'L' + str(x)
+            NewLocalCenter = Local.objects.create(L_id = NewID , L_Name = LocCenName , D_id = DistInst)
+            NewLocalCenter.save()
+            
+            user = User.objects.create_user(username=NewID, password=pwd)
+            user.save()
+            
+            
+            Items = Price.objects.filter(D_id = DistInst)
+            
+            
+            
+            for item in Items :
+            
+                InitStock = Stock.objects.create(L_id = NewLocalCenter , Item_id = item , Quantity = 0.0)
+                InitStock.save()
+                
+            
+            return redirect('/state')
+            
+        return render(request , 'state/addlocal.html' , {'form' : form})
 
+
+def addItem(request):
+
+    if request.user.is_authenticated and request.session['username'].startswith('a'):
+        return render(request , 'state/additem.html' , {})
 
 

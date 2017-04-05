@@ -10,6 +10,8 @@ urlpatterns = [
     url(r'^transport', views.transport , name='transport'),
     url(r'^allocate', views.StockAllocate , name='StockAllocate'),
     url(r'^deleteUser', views.deleteUser , name='deleteUser'),
+    url(r'^addlocal', views.addLocal , name='addLocal'),
+    url(r'^additem', views.addItem , name='addItem'),
    
     
 ]

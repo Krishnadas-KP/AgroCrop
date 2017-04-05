@@ -3,12 +3,17 @@
 <html>
 	<head>
 		
-		
+			
+
 		<link href="{% static 'css/selectcss.css' %}" rel="stylesheet" type="text/css">
 		<script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+		<link href="{% static 'css/material.min.css' %}" rel="stylesheet" type="text/css">
 		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
 		<script src="{%static 'js/bootstrap.min.js' %}"></script>
+		<script src="{%static 'js/material.min.js' %}"></script>
+		
 		<script src="{%static 'js/regajax.js' %}"></script>
+		
 		
 		<script type="text/javascript">
 		
@@ -131,9 +136,10 @@
 			
 			<input type="hidden" name="count" id="count" class="count" value="1">
 			
-			<input type="button" id = "btnId1" value="Add New"></input>
+			<input type="button" class = "btn" id = "btnId1" value="Add New"></input>
 <br><br>
-			<button type="submit" class="btn btn-primary btn-lg">SUBMIT DETAILS</button>
+			<button type="submit" class="btn">SUBMIT DETAILS</button>
+			
 			</form>
 					
 			</body>

@@ -1,6 +1,7 @@
 from django.shortcuts import render ,redirect
 from django.http import HttpResponse
 # Create your views here.
+import json as simplejson , urllib
 
 from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock , Routes
 def districtwelcomepage(request) :
