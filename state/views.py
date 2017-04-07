@@ -34,8 +34,8 @@ def setRates(request) :
           
             return render(request , 'state/rateSetForm.html', { 'itemDetails' : itemDetails , 'item' : itemDetails[0] } )
 
-
-        return render(request , 'state/stateRateSet.html' , {} )
+        items = Price.objects.order_by().values('Item_Name').distinct()
+        return render(request , 'state/stateRateSet.html' , {'items' : items} )
 
 
 
@@ -115,8 +115,7 @@ def transport(request):
             Source = request.POST.get('source')
             LCTotalQty = request.POST.get('quantity')
             
-            #localCentersDest = Stock.objects.filter(Item_id__Item_Name = TransportItem , Quantity__lt = 10.0).order_by('Quantity')
-            #print localCentersDest
+            
             localCentersDest = Stock.objects.none()
             
             localCenters = Stock.objects.filter(Item_id__Item_Name = TransportItem , Quantity__lt = 10.0).order_by('Quantity')
@@ -156,9 +155,7 @@ def StockAllocate(request) :
             
             
             if int(qty[i]) <> 0 :   # To avoid allocaing 0 Kg in the Routes table
-                
-                
-                
+               
                 L = Local.objects.get(L_Name = source)
                 D = Local.objects.get(L_Name = destn[i])
                 
@@ -228,6 +225,32 @@ def addLocal(request):
 def addItem(request):
 
     if request.user.is_authenticated and request.session['username'].startswith('a'):
-        return render(request , 'state/additem.html' , {})
+    
+        
+        DistList = District.objects.all()
+        if request.method == "POST" :
+        
+            itemName = request.POST.get('IName')
+            LastItem = Price.objects.last()
+            LastId =  int((LastItem.Item_id).split('I')[1])
+            LastId = LastId + 1
+            x =  "%04d" % (LastId)
+            NewID = 'I' + str(x)
+            
+            
+            for district in DistList:
+                
+                prices = request.POST.getlist(district.D_id)
+                NewItem = Price.objects.create(Item_id = NewID , Item_Name = itemName , D_id = district , Buy_Price = prices[0] , Sell_Price = prices[1])
+                NewItem.save()
+                
+                LocalCenters = Local.objects.filter(D_id = district)
+                for LocalCenter in LocalCenters :
+                    newItemLocalStock = Stock.objects.create(L_id = LocalCenter , Item_id = NewItem , Quantity = 0.0)
+                    newItemLocalStock.save()
+                    
+                    
+            return redirect('/state')
+        return render(request , 'state/additem.html' , {'Districts' : DistList})
 
 

@@ -21,13 +21,13 @@
 
         {% csrf_token %}
 
-            <select name="items" id="items">
+			<select name="items" id="items">
+			<option>Select Item</option>
+			{% for item in items %}
+           
+                <option>{{item.Item_Name}}
                 
-                <option>Select Item</option>
-                <option>Amaranthus Green</option>
-                <option>Banana Palayanthodan</option>
-                <option>Tapioca</option>
-        
+            {% endfor %}
             </select>
 
 

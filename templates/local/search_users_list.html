@@ -4,7 +4,7 @@
        {% for user in users %}
 			<form action="" method="post">
 			{% csrf_token %}
-			<div class="users panel panel-primary">
+			<div class="users panel panel-success col-sm-6">
 			
 			<div class="panel-heading">
     <h3 class="panel-title"><a href="profile">{{user.F_Name}}</a></h3>
@@ -22,7 +22,7 @@
                 <br>
                 <label>Farm Document: </label>
                 <a href="{{user.doc.url}}">
-                <img border="0" alt="No documents" src="{{user.doc.url}}" width="100" height="100"></a>
+                <img border="0" alt="No documents" src="{{user.doc.url}}" width="100" height="100"></a><br>
 				<button type="submit" class="btn btn-success">VERIFY</button>
 				</div>
 			</div>

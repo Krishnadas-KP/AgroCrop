@@ -5,21 +5,21 @@
     <meta charset="UTF-8">
     <title>Verify</title>
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-	
+
 </head>
 <body>
 <!--- Breadcrumb Navigation Starts--->
 		<ol class="breadcrumb">
-		<li>Home</li>
-		<li><a href="/local">{{name}}</a></li>
+		
+		<li><a href="/local">Home</a></li>
 		<li class="active">Verification</li>
 		</ol>
 		<!--- Breadcrumb Navigation Ends --->
 
 
 
-
-<input type="text" id="search" name="search" />
+<label>Filter By Aadhaar</label>
+<input type="text" id="search" name="search"/>
 {% csrf_token %}
 <br><br><br>
 
@@ -29,7 +29,7 @@
 			{% for user in users %}
 			<form action="" method="post">
 			{% csrf_token %}
-			<div class="users panel panel-primary">
+			<div class="users panel panel-success col-sm-6">
 			
 			<div class="panel-heading">
     <h3 class="panel-title">{{user.F_Name}}</h3>

@@ -7,10 +7,10 @@
 
 		<link href="{% static 'css/selectcss.css' %}" rel="stylesheet" type="text/css">
 		<script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
-		<link href="{% static 'css/material.min.css' %}" rel="stylesheet" type="text/css">
+		
 		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
 		<script src="{%static 'js/bootstrap.min.js' %}"></script>
-		<script src="{%static 'js/material.min.js' %}"></script>
+		
 		
 		<script src="{%static 'js/regajax.js' %}"></script>
 		
@@ -68,8 +68,9 @@
 				</tr>
 
                 <tr>
+					<td><label>Aadhaar Card Scanned Copy : </label></td>
                     <td>
-                    <input type="file" name="aadhaarpic" id="aadhaarpic" class="aadhaarpic">
+                    <input type="file" name="aadhaarpic" id="aadhaarpic" class="aadhaarpic" required>
                     </td>
 				</tr>
 
@@ -113,32 +114,33 @@
 			<table>
 			<div id="crops" align="center">  <!-- The Block which shows district zone , local zone and crops -->
 			<br>
-				<select class="district" id="districtid1" name="district">
+				<select class="district" id="districtid1" name="district" required>
 					<option>Select District </option>
 					{% for district in districtset %}
                   <option>{{district.D_Name}}</option>
                   {% endfor %} 
 				</select>
-				<select id="localid1" class="local" name="local">
+				<select id="localid1" class="local" name="local" required>
 				 <!-- Dynamically Generated Local Zone Drop Downs Come Here. Thanks to AJAX -->
 				 
 				</select>
-				<select id="itemid1" class="item" name="item">
+				<select id="itemid1" class="item" name="item" required>
 					<option>Select Crop </option>
 					{% for item in queryset %}
                   <option>{{item.Item_Name}}</option>
                   {% endfor %} 
-				</select>
-                <input type="file" name="farmdoc" id="farmdocid1" class="farmdoc">
+				</select><br><br>
+				<label>Upload Scanned Copy Of Land Document</label><input type="file" name="farmdoc" id="farmdocid1" class="farmdoc" required>
+                
                 <br>
 					
 			</div>
 			
 			<input type="hidden" name="count" id="count" class="count" value="1">
 			
-			<input type="button" class = "btn" id = "btnId1" value="Add New"></input>
+			<input type="button" class = "btn" id = "btnId1" value="Add Another Farm"></input>
 <br><br>
-			<button type="submit" class="btn">SUBMIT DETAILS</button>
+			<center><button type="submit" class="btn">SUBMIT DETAILS</button></center>
 			
 			</form>
 					
