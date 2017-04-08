@@ -1,14 +1,15 @@
 from django.shortcuts import render ,redirect
 from django.http import HttpResponse
-# Create your views here.
+from django.db.models import Sum
 import json as simplejson , urllib
 
 from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock , Routes
 def districtwelcomepage(request) :
 
     if request.user.is_authenticated and (request.session['username']).startswith('D') :
-
-        return render(request , 'district/welcome.html' , {'dname' : request.session['username'] })
+        
+        district = District.objects.get(D_id = request.session['username'])
+        return render(request , 'district/welcome.html' , {'dname' : district.D_Name  })
         
     else :
     
@@ -83,3 +84,26 @@ def StockAllocate(request) :
             
         
     return redirect('/district')
+    
+    
+    
+def payment(request):
+    if request.user.is_authenticated:
+    
+        if request.method == "POST":
+        
+            Aadhaar =  request.POST.get('aadhaar')
+            
+            SelectedFarmer = FarmerDetails.objects.filter(Aadhaar = Aadhaar)
+            Transactions = FarmerTransaction.objects.filter(Aadhaar = Aadhaar , L_id__D_id = request.session['username'])
+            total = Transactions.aggregate(Sum('Amount'))
+            
+            return render(request , 'district/farmerAmount.html' , {'farmer' : SelectedFarmer[0] , 'Transactions' : Transactions , 'total' : total})
+    
+        
+        farmers = FarmerTransaction.objects.filter(L_id__D_id = request.session['username']).order_by().values('Aadhaar').distinct()
+        
+        
+        
+            
+        return render(request , 'district/payments.html' , {'farmers' : farmers})

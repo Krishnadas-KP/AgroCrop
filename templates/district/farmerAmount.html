@@ -1,0 +1,43 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Billing </title>
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{%static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<center><span><h3>Details of Transaction</h3><span></center>
+<h3><u>Farmer Details</u></h3>
+<p>Farmer Name : <b>{{farmer.F_Name}} </b></p>
+<p>Aadhaar Number : <b>{{farmer.Aadhaar}}</b> </p>
+<p>Account Number : <b>{{farmer.AC_NO}}</b> </p>
+<p>Farmer's Bank : <b>{{farmer.Bank}}</b> </p>
+<p>Farmer's Bank IFSC : <b>{{farmer.IFSC}}</b> </p>
+<p>Total Amount Payable : <b>{{total.Amount__sum}} Rs.</b></p>
+<h3><u>Item History</u></h3>
+<table class="table">
+<tr>
+<th>Local Center </th>
+<th>Item </th>
+<th>Quantity (kg)</th>
+<th>Amount(Rs.)</th>
+<th>Transaction Date</th>
+</tr>
+{% for Transaction in Transactions%}
+<tr>
+<td>{{Transaction.L_id}}</td>
+<td>{{Transaction.Item_id}}</td>
+<td>{{Transaction.Quantity}}</td>
+<td>{{Transaction.Amount}}</td>
+<td>{{Transaction.Transaction_Date}}</td>
+</tr>
+{% endfor %}
+
+</table>
+</body>
+
+</html>

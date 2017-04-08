@@ -124,7 +124,9 @@ def transport(request):
             
                 source = str(Source)
                 dest = str(localCenter.L_id)
+                
                 url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='+source+'&destinations='+dest+'&key=AIzaSyD-itnbYYRdntj6xMcEEB5TqU5kvyCntBw'
+                
                 result= simplejson.load(urllib.urlopen(url))
                 distance = result['rows'][0]['elements'][0]['distance']['value']
             

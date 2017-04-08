@@ -6,6 +6,6 @@ urlpatterns = [
 	url(r'^$', views.districtwelcomepage , name='districtwelcomepage'),
     url(r'^transport', views.transport , name='transport'),
     url(r'^allocate', views.StockAllocate , name='StockAllocate'),
-    
+    url(r'^payment', views.payment , name='payment'),
     
 ]

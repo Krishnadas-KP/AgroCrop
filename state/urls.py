@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^deleteUser', views.deleteUser , name='deleteUser'),
     url(r'^addlocal', views.addLocal , name='addLocal'),
     url(r'^additem', views.addItem , name='addItem'),
+    
    
     
 ]
