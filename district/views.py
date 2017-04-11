@@ -1,7 +1,9 @@
 from django.shortcuts import render ,redirect
 from django.http import HttpResponse
 from django.db.models import Sum
-import json as simplejson , urllib
+import simplejson as json
+import requests
+
 
 from home.models import FarmerDetails , Local , Price , District , BuyerTransaction , FarmerTransaction ,Stock , Routes
 def districtwelcomepage(request) :
@@ -40,7 +42,12 @@ def transport(request):
                 source = str(Source)
                 dest = str(localCenter.L_id)
                 url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='+source+'&destinations='+dest+'&key=AIzaSyD-itnbYYRdntj6xMcEEB5TqU5kvyCntBw'
-                result= simplejson.load(urllib.urlopen(url))
+                r = requests.get(url)
+                response = r.json()
+                
+                Strresult= json.dumps(response)
+                result = json.loads(Strresult)
+                
                 distance = result['rows'][0]['elements'][0]['distance']['value']
                 
                 if float(distance) < 50000.0 :
@@ -50,7 +57,7 @@ def transport(request):
             
             return render(request , 'state/transdest.html' ,{'localCenters' : localCentersDest , 'remain' : LCTotalQty , 'source' : Source , 'item' : TransportItem})
             
-        localCentersSrc = Stock.objects.filter(L_id__D_id = request.session['username'] , Quantity__gt = 10.0).order_by('-Quantity')
+        localCentersSrc = Stock.objects.filter(L_id__D_id = request.session['username'] , Quantity__gt = 10.0 , WaitForAllocation = 0).order_by('-Quantity')
     
         return render(request , 'state/transport.html' , {'localCenters' : localCentersSrc} )
         
@@ -58,30 +65,31 @@ def transport(request):
 def StockAllocate(request) :
 
     if request.method == "POST" :
-    
         source = request.POST.get('source')
         destn = request.POST.getlist('dest')
         item = request.POST.get('item')
         qty = request.POST.getlist('allocatedAmt')
         count = len(destn)
         i = 0
+        L = Local.objects.get(L_Name = source)
         while(count > 0 ) :
             
             
-            if int(qty[i]) <> 0 :   # To avoid allocaing 0 Kg in the Routes table
+            if float(qty[i]) <> 0.0 :   # To avoid allocaing 0 Kg in the Routes table
+
                 
-                
-                
-                L = Local.objects.get(L_Name = source)
                 D = Local.objects.get(L_Name = destn[i])
                 
                 
-                RouteInstance = Routes.objects.create(src = L , dest = D , Item_Name = item , Quantity = qty[i])
+                RouteInstance = Routes.objects.create(src = L , dest = D , Item_Name = item , Quantity = float(qty[i]))
                 RouteInstance.save()
                 
             i = i + 1
             count = count - 1
             
+        SourceToBlock = Stock.objects.get(L_id = L , Item_id__Item_Name = item )
+        SourceToBlock.WaitForAllocation = 1
+        SourceToBlock.save()
         
     return redirect('/district')
     

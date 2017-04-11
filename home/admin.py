@@ -42,7 +42,7 @@ admin.site.register(BuyerTransaction , BuyerTransactionAdmin)
 
 
 class StockAdmin(admin.ModelAdmin) :
-    list_display = ['id' ,'L_id', 'Item_id' ,'Quantity']
+    list_display = ['id' ,'L_id', 'Item_id' ,'Quantity' , 'WaitForAllocation']
 
 
 admin.site.register(Stock , StockAdmin)

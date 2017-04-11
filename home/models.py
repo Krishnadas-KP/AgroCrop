@@ -116,7 +116,7 @@ class Stock(models.Model) :
     L_id = models.ForeignKey(Local, on_delete=models.CASCADE)
     Item_id = models.ForeignKey(Price, on_delete=models.CASCADE)
     Quantity = models.FloatField()
-    
+    WaitForAllocation = models.CharField(max_length=1 , default="0")
     
     def __unicode__ (self):
         return '%s' % (self.L_id)

@@ -286,8 +286,12 @@ def transport(request) :
             updateStock = Stock.objects.get(L_id = request.session['username'] , Item_id__Item_Name = instance.Item_Name)
              
             updateStock.Quantity = float(updateStock.Quantity) - float(instance.Quantity)
-            updateStock.save()
             
+            
+            if Routes.objects.filter(src__L_id = request.session['username'] , Item_Name = instance.Item_Name, SendStatus = 0).count() == 0 :
+                updateStock.WaitForAllocation = 0
+                
+            updateStock.save()
             return redirect('/local')
             
         routes = Routes.objects.filter(src = request.session['username'] , SendStatus = 0)
