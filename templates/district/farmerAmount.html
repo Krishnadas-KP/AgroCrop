@@ -8,8 +8,21 @@
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
 	<script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
     <script src="{%static 'js/bootstrap.min.js' %}"></script>
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/print.css' %}" type="text/css" media="print" />
+	
+	
 </head>
 <body>
+<ol class="breadcrumb">
+		
+		<li><a href="/district">Home</a></li>
+		<li><a href="payment">Payments</a></li>
+		<li class="active">{{farmer.F_Name}}</li>
+		</ol>
+		
+		
+		
 <center><span><h3>Details of Transaction</h3><span></center>
 <h3><u>Farmer Details</u></h3>
 <p>Farmer Name : <b>{{farmer.F_Name}} </b></p>
@@ -38,6 +51,10 @@
 {% endfor %}
 
 </table>
+
+<form><input type="button" value=" Print this page "
+onclick="window.print();" /></form>
+
 </body>
 
 </html>

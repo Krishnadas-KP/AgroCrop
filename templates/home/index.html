@@ -1,104 +1,67 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>AGROCROP</title>
-
+    <title>Agrocrop</title>
+    <meta name="description" content="Agrocrop - The one stop vegetable management website">
+    <meta name="keywords" content="agrocrop , vegetables , kerala , horticorp , vfpck">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300|Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
 
     <link href="{% static 'css/stylish-portfolio.css' %}" rel="stylesheet" type="text/css">
 
 
     <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-	
-	
-	
-	
-
-	
-	
-</head>
-
-<body>
-
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="#top" onclick=$("#menu-close").click();>Menu</a>
-            </li>
-            <li>
-                <a href="" onclick=$("#menu-close").click();>Home</a>
-            </li>
-            <li>
-                <a href="/login" onclick=$("#menu-close").click();>Login</a>
-            </li>
-            <li>
-                <a href="register" onclick=$("#menu-close").click();>Register</a>
-            </li>
-            <li>
-                <a href="rates" onclick=$("#menu-close").click();>Check Rates</a>
-            </li>
-            <li>
-                <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Header -->
-    <header id="top" class="header">
-        <div class="text-vertical-center">
-            <h1>Agro Crop</h1>
-            <h3>One Stop Vegetable Management</h3>
-            
-            
-            <br>
-
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
+    
+  </head>
+  <body>
+    <!--header-->
+    <header class="main-header" id="header">
+        <div class="bg-color">
+            <!--nav-->
+            <nav class="nav navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mynavbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="fa fa-bars"></span>
+                        </button>
+                            <a href="" class="navbar-brand">Agrocrop</a>
+                        </div>
+                        <div class="collapse navbar-collapse navbar-right" id="mynavbar">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="">Home</a></li>
+                                <li><a href="register">Register</a></li>
+                                <li><a href="rates">Check Rates</a></li>
+                                <li><a href="/login">Log In</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!--/ nav-->
+            <div class="container text-center">
+                <div class="wrapper wow fadeInUp delay-05s" >
+                    
+                    <h3 class="title">Agrocrop</h3>
+                    <h4 class="sub-title">The One Stop Vegetable Management Website</h4>
+                    <a href="register" class="btn btn-danger">New Farmers Register Here</a>
+                </div>
+            </div>
+        </div>
     </header>
- 
-
-  
-
-
-
-
-
-
-
-
-    <!-- jQuery -->
+    <!--/ header-->
+    <!---->
+   
+    
+   
     <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{%static 'js/bootstrap.min.js' %}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-    
-    
-    </script>
-
-</body>
-
+   
+  </body>
 </html>

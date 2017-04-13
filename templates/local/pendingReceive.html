@@ -7,13 +7,20 @@
     <title>Pending Receive</title>
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
 </head>
 <body>
+	<ol class="breadcrumb">
+		
+		<li><a href="/local">Home</a></li>
+		<
+		<li class="active">Receive Pending</li>
+		</ol>
 <h3> Item Send. Pending Reception </h3>
 {% for route in routes %}
 			
 			{% csrf_token %}
-			<div class="panel panel-success">
+			<div class="panel panel-success col-sm-7">
 			
 			<div class="panel-heading">
     <h3 class="panel-title">{{route.dest}}</h3>

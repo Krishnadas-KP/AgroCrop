@@ -7,8 +7,16 @@
     
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/print.css' %}" type="text/css" media="print" />
 </head>
 <body>
+<ol class="breadcrumb">
+		
+		<li><a href="/local">Home</a></li>
+		<li><a href="buy">Buy Vegetables</a></li>
+		<li class="active">Billing</li>
+		</ol>
 <h1>BILL</h1>
 
 <h3>AADHAAR NUMBER : {{Aadhaar}}</h3>
@@ -34,13 +42,17 @@
 <div id="total">
 	<h3>Total : {{total}} Rs.</h3>
 </div>
+<center><b><i>******Thank You. Have A Nice Day******</i></b></center>
+<form><input type="button" value=" Print this page "
+onclick="window.print();" /></form>
 
+<!---
 <script type="text/javascript">
 $(document).ready(function() {
 	
     window.print();
 });
 </script>
-
+--->
 </body>
 </html>

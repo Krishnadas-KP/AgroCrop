@@ -4,16 +4,28 @@
 	<head>
 		
 			
-
+		
 		<link href="{% static 'css/selectcss.css' %}" rel="stylesheet" type="text/css">
 		<script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
 		
 		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+		<link href="{% static 'css/basic.css' %}" rel="stylesheet" type="text/css">
+		<style>
+		
+					
+					
+				td {
+				
+						width : 10px;
+				
+				}
+				
+				
+		</style>
 		<script src="{%static 'js/bootstrap.min.js' %}"></script>
 		
 		
 		<script src="{%static 'js/regajax.js' %}"></script>
-		
 		
 		<script type="text/javascript">
 		
@@ -54,12 +66,14 @@
 		<li class="active">Registration</li>
 		</ol>
 		<!--- Breadcrumb Navigation Ends --->
-		<br>
+		
+		
 		<form action="" method="POST" enctype="multipart/form-data">
 		
 			{%csrf_token%}
 			
-			<span>ENTER PERSONAL DETAILS </span>
+			<center><h3>Enter Personal Details</h3></center>
+			
 			<table class="table table-condensed">
 			
 				<tr>
@@ -106,13 +120,15 @@
 				
 			
 			</table>
+			
+			
+			
+		
+			<center><h3>Enter Crop Details</h3></center>
 			<br>
 			<br>
-			<span>ENTER CROP DETAILS</span>
-			<br>
-			<br>
-			<table>
-			<div id="crops" align="center">  <!-- The Block which shows district zone , local zone and crops -->
+			
+			<div id="crops">  <!-- The Block which shows district zone , local zone and crops -->
 			<br>
 				<select class="district" id="districtid1" name="district" required>
 					<option>Select District </option>
@@ -129,7 +145,7 @@
 					{% for item in queryset %}
                   <option>{{item.Item_Name}}</option>
                   {% endfor %} 
-				</select><br><br>
+				</select><br>
 				<label>Upload Scanned Copy Of Land Document</label><input type="file" name="farmdoc" id="farmdocid1" class="farmdoc" required>
                 
                 <br>
@@ -138,11 +154,12 @@
 			
 			<input type="hidden" name="count" id="count" class="count" value="1">
 			
-			<input type="button" class = "btn" id = "btnId1" value="Add Another Farm"></input>
+			<input type="button" class = "btn btn-warning" id = "btnId1" value="Add Another Farm"></input>
 <br><br>
-			<center><button type="submit" class="btn">SUBMIT DETAILS</button></center>
+			<center><button type="submit" class="btn btn-danger">SUBMIT DETAILS</button></center>
 			
 			</form>
+			
 					
 			</body>
 			</html>

@@ -5,13 +5,21 @@
     <meta charset="UTF-8">
     <title>Transport Out</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<script src="{%static 'js/bootstrap.min.js' %}"></script>
+    <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
 </head>
 <body>
+<ol class="breadcrumb">
+		
+		<li><a href="/local">Home</a></li>
+		<li class="active">Transport Out</li>
+		</ol>
 <h3> Please Transport These Out </h3>
 {% for route in routes %}
 			<form action="" method="post">
 			{% csrf_token %}
-			<div class="panel panel-success">
+			<div class="panel panel-success col-md-6">
 			
 			<div class="panel-heading">
     <h3 class="panel-title">{{route.dest}}</h3>

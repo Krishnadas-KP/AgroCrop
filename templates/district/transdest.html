@@ -3,11 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Select Destination</title>
+    <title>Select DDestination</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
 </head>
 <body>
-<h3> Local Centers With Low Stock </h3>
+<ol class="breadcrumb">
+		
+		<li><a href="/district">Home</a></li>
+		<li><a href="transport">Stock Allocation</a></li>
+		<li class="active">Find Destinations</li>
+		</ol>
+<center><h3>Local Centers With Low Stock</h3></center>
 
 			<label>SELECTED SOURCE : </label>{{source}}<br>
 			

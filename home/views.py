@@ -78,7 +78,8 @@ def registration(request) :
         nearestLocal = request.POST.getlist('local')
         i = 0
         count = int(request.POST.get('count'))
-        
+        print "count is"
+        print count
         while count > 0 :
             
             district = District.objects.get(D_Name = districts[i])
@@ -90,7 +91,7 @@ def registration(request) :
             farmer = FarmerDetails.objects.create(Aadhaar = Aadhaar , F_Name = name ,AadhaarPic = Aadhaarpic, doc = documents[i] ,F_Addr = Address , F_Ph_NO = mobNum ,L_id = Locals, Item_id = Item , Bank = Bank , AC_NO = ACnum , IFSC = IFSC , VerifiedStatus = 0 , ConfirmedStatus = 0)
             farmer.save()
             i = i+1
-            count = count-1  
+            count = count-1
         
         
         return render(request , 'home/regConfirm.html' , {'name' : name})

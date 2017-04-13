@@ -6,18 +6,31 @@
     <meta charset="UTF-8">
     <title>{{lname}}</title>
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<script src="{%static 'js/bootstrap.min.js' %}"></script>
     <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
 	<style>
 	
+
+	.tab {
 	
-	body, .jumbotron{
 	
-		background-color:#ffffff;
-		
-		
+			
+			top : 50%;
+			left : 50%;
 	}
 	
+	.huge {
+				font-size: 40px;
+				}
+
+	#page-wrapper {
 	
+			position : relative;
+			left : 33%;
+	
+	}
+
 	
 	</style>
 
@@ -42,23 +55,166 @@
   
 </div>
 
-		<div class="container-fluid">
-		<div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-  <li role="presentation" class="active"><a href="">Home</a></li>
-  <li role="presentation"><a href="verify">Verification</a></li>
-  <li role="presentation"><a href="buy">Buy Vegetables</a></li>
-  <li role="presentation"><a href="sell">Sell Vegetables</a></li>
-  <li role="presentation"><a href="rates">Today's Rates</a></li>
-  <li role="presentation"><a href="transportOut">Transport Out<span id="BadgeOut" class="badge">{{count}}</span></a></li>
-  <li role="presentation"><a href="transportIn">Transport In<span id="BadgeIn" class="badge">{{InCount}}</span></a></li>
-  <li role="presentation"><a href="pending">Receive Pending</a></li>
-  <li role="presentation"><a href="/logout">Logout</a></li>
-</ul>
-</div></div></div>
+	
 
-     
+<div id="page-wrapper">
+           
+            <div class="row">
+			<a href="transportOut">
+                <div class="col-lg-2 col-md-6">
+				
+                    <div class="panel panel-primary" style="background-color : #90EE90;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                
+                                <div class="col-xs-12 text-right">
+                                    <div id="BadgeOut" class="huge">{{count}}</div>
+                                    <div>Transport Out</div>
+
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+			
+			
+			 
+            
+			<a href="transportIn">
+                <div class="col-lg-2 col-md-6">
+				
+                    <div class="panel panel-primary" style="background-color : #90EE90;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                
+                                <div class="col-xs-12 text-right">
+                                    <div id="BadgeIn" class="huge">{{InCount}}</div>
+                                    <div>Collect In</div>
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+			</div>
+			
+			
+			<div class="row">
+			<a href="verify">
+                <div class="col-lg-2 col-md-6">
+				
+                    <div class="panel panel-primary" style="background-color : #B0C4DE;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                
+                                <div class="col-xs-12 text-right">
+                                    
+                                    <div>Verify Farmers</div>
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+			
+			<a href="rates">
+                <div class="col-lg-2 col-md-6">
+				
+                    <div class="panel panel-primary" style="background-color : #B0C4DE;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                
+                                <div class="col-xs-12 text-right">
+                                    
+                                    <div>Check Today's Rates</div>
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+			</div>
+			
+			
+			<div class="row">
+			<a href="buy">
+                <div class="col-lg-2 col-md-6">
+				
+                    <div class="panel panel-primary" style="background-color : #CD853F;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                
+                                <div class="col-xs-12 text-right">
+                                    
+                                    <div>Buy Vegetables</div>
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+			
+			<a href="sell">
+                <div class="col-lg-2 col-md-6">
+				
+                    <div class="panel panel-primary" style="background-color : #CD853F;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                
+                                <div class="col-xs-12 text-right">
+                                    
+                                    <div>Sell Vegetables</div>
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+			</div>
+			
+			
+			
+			
+				<div class="row">
+			<a href="pending">
+                <div class="col-lg-2 col-md-6">
+				
+                    <div class="panel panel-primary" style="background-color : #FFDAB9;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                
+                                <div class="col-xs-12 text-right">
+                                    
+                                    <div>Receive Pending</div>
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+			
+			<a href="/logout">
+                <div class="col-lg-2 col-md-6">
+				
+                    <div class="panel panel-primary" style="background-color : #FFDAB9;">
+                        <div class="panel-heading">
+                            <div class="row">
+                                
+                                <div class="col-xs-12 text-right">
+                                    
+                                    <div>Log Out</div>
+                                </div>
+                            </div>
+                        </div>
+                       </a>
+                    </div>
+                </div>
+			</div>
+			
+			
+</div>
+
 <input type="hidden" id="localCenter"/>
 <br>
 <script type="text/javascript">
@@ -93,11 +249,11 @@ function refresh() {
         });
 
     
-    setTimeout(refresh, 15000);
+    setTimeout(refresh, 3000);
    
 }
 
-setTimeout(refresh, 15000);
+setTimeout(refresh, 3000);
 
 
 

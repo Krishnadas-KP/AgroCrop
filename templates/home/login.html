@@ -4,8 +4,8 @@
 <head>
 
 
-<title>LOGIN</title>
-
+<title>Log In</title>
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 <style>
 #login {
   position: fixed;
@@ -14,14 +14,28 @@
   top: 30%;
   left: 45%;
   margin: -100px 0 0 -150px;
-  background: rgba(32, 99, 56, 0.54);
+  background: rgba(32, 99, 56, 0.10);
   padding : 100px 100px 100px 100px; 
+  
 }
+					body {
+						background-color : rgba(37, 188, 168, 0.42);
+				
+				}
+			.breadcrumb {
+				
+						background-color : black;
+					}
 </style>
+
 </head>
-     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-     <link href="{% static 'css/stylish-portfolio.css' %}" rel="stylesheet">
-	
+     
+     
+<body>
+<ol class="breadcrumb">
+		<li><a href="/">Home</a></li>
+		<li class="active">Log In</li>
+		</ol>
 <header id="top" class="header">
 <div id="login">
 <div class="{{class}}">
@@ -40,7 +54,7 @@
 </div>
 <script src = "{% static 'js/jquery-3.1.1.min.js' %}"></script>
 <script src = "{% static 'js/bootstrap.min.js' %}"></script>
-<body>
+
 </body>
 
 

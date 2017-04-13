@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <title>Select Source</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
 </head>
 <body>
-<h3> Local Centers With Surplus Stock </h3>
+<ol class="breadcrumb">
+		
+		<li><a href="/district">Home</a></li>
+		<li class="active">Stock Allocation</li>
+		</ol>
+<center><h3>Local Centers With Surplus Stock</h3></center>
 {% for localCenter in localCenters %}
 			<form action="" method="post">
 			{% csrf_token %}

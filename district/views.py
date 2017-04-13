@@ -55,11 +55,11 @@ def transport(request):
                     x = localCenters.filter(L_id = localCenter.L_id)
                     localCentersDest = localCentersDest|x
             
-            return render(request , 'state/transdest.html' ,{'localCenters' : localCentersDest , 'remain' : LCTotalQty , 'source' : Source , 'item' : TransportItem})
+            return render(request , 'district/transdest.html' ,{'localCenters' : localCentersDest , 'remain' : LCTotalQty , 'source' : Source , 'item' : TransportItem})
             
         localCentersSrc = Stock.objects.filter(L_id__D_id = request.session['username'] , Quantity__gt = 10.0 , WaitForAllocation = 0).order_by('-Quantity')
     
-        return render(request , 'state/transport.html' , {'localCenters' : localCentersSrc} )
+        return render(request , 'district/transport.html' , {'localCenters' : localCentersSrc} )
         
         
 def StockAllocate(request) :

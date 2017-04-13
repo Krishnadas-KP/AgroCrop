@@ -4,12 +4,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
+    <title>Bill</title>
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/print.css' %}" type="text/css" media="print" />
 </head>
 <body>
-<h1>BILL</h1>
+	<ol class="breadcrumb">
+		
+		<li><a href="/local">Home</a></li>
+		<li><a href="sell">Sell Vegetables</a></li>
+		<li class="active">Billing</li>
+		</ol>
+<center><h3>BILL</h3></center>
 
 
 <table class="table table-bordered">
@@ -34,13 +42,9 @@
 <div id="total">
 	<h3>Total : {{total}} Rs.</h3>
 </div>
-
-<script type="text/javascript">
-$(document).ready(function() {
-	
-    window.print();
-});
-</script>
+<center><b><i>******Thank You. Have A Nice Day******</i></b></center>
+<form><input type="button" value=" Print this page "
+onclick="window.print();" /></form>
 
 </body>
 </html>

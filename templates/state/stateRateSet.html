@@ -12,12 +12,34 @@
         <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
         
         <script src="{%static 'js/bootstrap.min.js' %}"></script>
-    </head>
+		<link href="{% static 'css/basic.css' %}" rel="stylesheet">
+		
+		<style>
+						#rateSetter{
+						position : fixed;
+						top : 50%;
+						left : 30%;
+						
+						}
+						
+						#itemRatesDiv{
+						
+						position : fixed;
+						top : 35%;
+						left : 35%;
+						
+						}
+		</style>
+</head>
+<body>
+<ol class="breadcrumb">
+		
+		<li><a href="/state">Home</a></li>
+		<li class="active">Set Rates</li>
+		</ol>
 
-    <body>
-
-        
-        <h3>Please Select The Item For Setting Rate</h3>
+        <div id="itemRatesDiv">
+        <center><h3>Please Select The Item For Setting Rate</h3>
 
         {% csrf_token %}
 
@@ -29,8 +51,8 @@
                 
             {% endfor %}
             </select>
-
-
+</center>
+</div>
             <div id="rateSetter">
 
             </div>

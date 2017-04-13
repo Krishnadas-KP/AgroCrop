@@ -7,7 +7,7 @@
     <title>Buy Vegetables</title>
 	<script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-	
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
 
 	
 	
@@ -24,11 +24,11 @@
 
 
 {% csrf_token %}
-<label> Enter Aadhaar Number To Check </label>
+<center><label> Enter Aadhaar Number To Check </label>
 <input type="text" id="Aadhaar" class="Aadhaar" name="Aadhaar"/>
 
-<input type="button" id="btn" value="Check User">
-
+<input type="button" class="btn btn-danger" id="btn" value="Check User">
+</center>
 <br><br><br><br><br>
 <br><br><br><br><br>
 

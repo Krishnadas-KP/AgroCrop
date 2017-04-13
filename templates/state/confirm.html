@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <title>Confirm Farmer</title>
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-	
+	<link href="{% static 'css/basic.css' %}" rel="stylesheet">
 </head>
 <body>
+<ol class="breadcrumb">
+		
+		<li><a href="/state">Home</a></li>
+		<li class="active">Confirmation</li>
+		</ol>
 
 <ul id="search-results">
 
@@ -15,7 +20,7 @@
 			{% for user in users %}
 			<form action="" method="post">
 			{% csrf_token %}
-			<div class="users panel panel-primary">
+			<div class="users panel panel-primary col-md-8">
 			
 			<div class="panel-heading">
     <h3 class="panel-title">{{user.F_Name}}</h3>
@@ -44,7 +49,7 @@
 				<input type="hidden" name="id" value="{{user.id}}"/>
 				<br><button type="submit" class="btn btn-success">CONFIRM</button>
 				
-				<button type="submit" formaction = "deleteUser" class="btn btn-success">DELETE</button>
+				<button type="submit" formaction = "deleteUser" class="btn btn-danger">DELETE</button>
 				</div>
 			</div>
 			

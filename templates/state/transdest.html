@@ -5,9 +5,18 @@
     <meta charset="UTF-8">
     <title>Select Destination</title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/basic.css' %}" rel="stylesheet">
 </head>
 <body>
+<ol class="breadcrumb">
+		
+		<li><a href="/state">Home</a></li>
+		<li><a href="transport">Stock Allocation</a></li>
+		<li class="active">Find Destinations</li>
+		</ol>
 <h3> Local Centers With Low Stock </h3>
+
+			
 
 			<label>SELECTED SOURCE : </label>{{source}}<br>
 			
@@ -16,6 +25,7 @@
 			<label>REMAINING AT SOURCE : </label><input type="text" name="remaining" id="remain" value="{{remain}}" disabled/>Kg
 {% for localCenter in localCenters %}
 
+<div id="destinations">
 			
 			<form action="allocate" method="post">
 			<input type="hidden" name="item" value="{{item}}"/>
@@ -47,7 +57,7 @@
 		
 		<br><button type="submit" class="btn btn-success">Allocate</button>
 		</form>
-		
+</div>		
     <script src="{%static 'js/jquery-3.1.1.min.js' %}"></script>
 
     <script src="{%static 'js/bootstrap.min.js' %}"></script> 
@@ -85,5 +95,7 @@
 	});
 });
 	</script>
+	
+
 </body>
 </html>

@@ -1,10 +1,11 @@
+
 {% if users > 0 %}
     
 		
        {% for user in users %}
 			<form action="" method="post">
 			{% csrf_token %}
-			<div class="users panel panel-success col-sm-6">
+			<div class="users panel panel-success col-md-8">
 			
 			<div class="panel-heading">
     <h3 class="panel-title"><a href="profile">{{user.F_Name}}</a></h3>
@@ -31,6 +32,5 @@
 			
         {% endfor %}
 {% endif %}
-
 
 
