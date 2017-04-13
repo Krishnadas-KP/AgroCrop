@@ -1,6 +1,8 @@
-@print {.breadcrumb, form {
+@print {
+	
+	.breadcrumb{
 	
 	visibility : hidden;
 	
-}
+				}
 }
